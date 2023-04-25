@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaTai.Web", "ChaTai.Web\ChaTai.Web.csproj", "{9018C87A-4941-4E0A-BC74-7A11E61C2C15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaTai.Blazor", "ChaTai.Blazor\ChaTai.Blazor.csproj", "{F0BFC1BA-C95C-40E5-B7A6-C1EB39883469}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaTai.App", "ChaTai.App\ChaTai.App.csproj", "{A693BC7C-ECA9-4919-B71B-4E270378A87A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaTai.Core", "ChaTai.Core\ChaTai.Core.csproj", "{26E12C00-F225-4898-8CDA-844DC5AA1359}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{2832B4E0-945F-4D9C-8B88-2A1095C7DD23}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9018C87A-4941-4E0A-BC74-7A11E61C2C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9018C87A-4941-4E0A-BC74-7A11E61C2C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9018C87A-4941-4E0A-BC74-7A11E61C2C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9018C87A-4941-4E0A-BC74-7A11E61C2C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0BFC1BA-C95C-40E5-B7A6-C1EB39883469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BFC1BA-C95C-40E5-B7A6-C1EB39883469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BFC1BA-C95C-40E5-B7A6-C1EB39883469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BFC1BA-C95C-40E5-B7A6-C1EB39883469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A693BC7C-ECA9-4919-B71B-4E270378A87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A693BC7C-ECA9-4919-B71B-4E270378A87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A693BC7C-ECA9-4919-B71B-4E270378A87A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A693BC7C-ECA9-4919-B71B-4E270378A87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A693BC7C-ECA9-4919-B71B-4E270378A87A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A693BC7C-ECA9-4919-B71B-4E270378A87A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{26E12C00-F225-4898-8CDA-844DC5AA1359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E12C00-F225-4898-8CDA-844DC5AA1359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E12C00-F225-4898-8CDA-844DC5AA1359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E12C00-F225-4898-8CDA-844DC5AA1359}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2850F7D-C7B6-48ED-91A2-6FBF0B098875}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,173 @@
+﻿
+<div class="chat" key="@CurrentSession.Id">
+    <div class="window-header">
+        <div class="window-header-title">
+            <div class="window-header-main-titlechat-body-title">
+                @CurrentSession.Title
+            </div>
+            <div class="window-header-sub-title">
+                与ChatGPT的 @CurrentSession.Messages.Count 条对话
+            </div>
+        </div>
+        <div class="window-actions">
+            <div class="window-action-button mobile">
+                <IconBtn Bordered Title="返回消息列表" OnClick="ChangeSidebarVisible">
+                    <Icon IconFileName="return" />
+                </IconBtn>
+            </div>
+            @*    <div class="window-action-button">
+            <IconBtn Bordered Title="重命名">
+            <Icon IconFileName="rename" />
+            </IconBtn>
+            </div>*@
+            <div class="window-action-button no-mobile">
+                @if (AppConfig.TightBorder)
+                {
+                    <IconBtn Bordered OnClick="ChangeTightBorder">
+                    <Icon IconFileName="min" />
+                    </IconBtn>
+                }
+                else
+                {
+
+                    <IconBtn Bordered OnClick="ChangeTightBorder">
+                    <Icon IconFileName="max" />
+                    </IconBtn>
+                }
+            </div>
+        </div>
+        @if (!ChatIsScollBottom)
+        {
+            <div class="prompt-toast" key="prompt-toast">
+                <div class="prompt-toast-inner clickable" role="button" @onclick="ChangePromptModalVisible">
+                    <Icon IconFileName="brain" />
+                    <span class="prompt-toast-content">
+                        设置前置上下文
+                    </span>
+                </div>
+            </div>
+        }
+        @if (ShowPromptModal)
+        {
+            <Modal Title="前置上下文和历史记忆" OnClose="ChangePromptModalVisible">
+                <div style="text-align:center">功能开发中...</div>
+            </Modal>
+        }
+    </div>
+
+    <div class="chat-body" id="msg-box">
+
+        @foreach (var item in CurrentSession.Messages)
+        {
+            <div key="1" class="@(item.Role == "user"? "chat-message-user" : "chat-message")">
+                <div class="chat-message-container">
+                    <div class="chat-message-avatar">
+                        @if (item.Role == "user")
+                        {
+                            <img src="@AppConfig.Avatar" class="user-avtar" />
+                            @*  <Icon IconFileName="my" CssName="user-avtar" />*@
+                        }
+                        else
+                        {
+                            <Icon IconFileName="bot" CssName="user-avtar" />
+                        }
+                    </div>
+                    @if (item.IsStream)
+                    {
+                        <div class="chat-message-status">
+                            正在输入
+                        </div>
+                    }
+                    <div class="chat-message-item">
+                        @if (item.Role != "user")
+                        {
+                            <div class="chat-message-top-actions">
+                                @* <div class="chat-message-top-action">
+                        Retry
+                        </div>*@
+                                <div class="chat-message-top-action" @onclick="async () => await CopyText(item.Content)">复制</div>
+                            </div>
+                        }
+                        @if (item.Role != "user" && item.Content.Length == 0)
+                        {
+                            <Icon IconFileName="three-dots" />
+                        }
+                        else
+                        {
+                            <div class="markdown-body" style="font-size: 13px;">
+                                <Markdown Content="@item.Content" />
+                            </div>
+                        }
+                    </div>
+
+                    <div class="chat-message-actions">
+                        <div class="chat-message-action-date">
+                            @item.Time.ToString("yyyy-MM-dd HH:mm:ss")
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+        <div style="opacity: 0;height: 1px">
+            -
+        </div>
+    </div>
+
+    <div class="chat-input-panel">
+        @if (PromptList != null && PromptList.Count != 0)
+        {
+            <div class="prompt-hints">
+                @foreach (var item in PromptList)
+                {
+                    <div class="prompt-hint" @onclick="() => SelectPrompt(item)">
+                        <div class="hint-title">@item.Title</div>
+                        <div class="hint-content">@item.Content</div>
+                    </div>
+                }
+            </div>
+        }
+        <div style="display:flex;justify-content:space-between">
+            <div class="chat-input-actions">
+                @if (ChatIsScollBottom)
+                {
+                    <div class="chat-input-action clickable" @onclick="ChangePromptModalVisible">
+                        <Icon IconFileName="brain" />
+                    </div>
+                }
+                else
+                {
+                    <div class="chat-input-action clickable" @onclick="GoToBottom">
+                        <Icon IconFileName="bottom" />
+                    </div>
+                }
+
+                @if (AppConfig.Theme == Theme.Auto)
+                {
+                    <div class="chat-input-action clickable" @onclick="() => ChangeTheme(Theme.Light)">
+                        <Icon IconFileName="auto" />
+                    </div>
+                }
+                else if (AppConfig.Theme == Theme.Light)
+                {
+                    <div class="chat-input-action clickable" @onclick="() => ChangeTheme(Theme.Dark)">
+                        <Icon IconFileName="light" />
+                    </div>
+                }
+                else if (AppConfig.Theme == Theme.Dark)
+                {
+                    <div class="chat-input-action clickable" @onclick="() => ChangeTheme(Theme.Auto)">
+                        <Icon IconFileName="dark" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="chat-input-panel-inner">
+            <MessageBox Class="chat-input" placeholder="@(AppConfig.ShortcutKey.GetDescription() + " 键发送, / 键触发补全")" @bind-Value="UserMessage" @onkeyup="KeySubmit" rows=5 />
+            <IconBtn Title="Send" CssClass="chat-input-send no-dark" Text="Send" OnClick="Send">
+                <Icon IconFileName="send-white" />
+            </IconBtn>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/app.css",
+    "inputFile": "wwwroot/styles/app.scss",
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFile": "Pages/Index.razor.css",
+    "inputFile": "Pages/Index.razor.scss",
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFile": "Pages/Components/Iconbtn.razor.css",
+    "inputFile": "Pages/Components/Iconbtn.razor.scss",
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFile": "Pages/Settings.razor.css",
+    "inputFile": "Pages/Settings.razor.scss",
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFile": "Pages/Components/Chat.razor.css",
+    "inputFile": "Pages/Components/Chat.razor.scss",
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFile": "Pages/Components/Modal.razor.css",
+    "inputFile": "Pages/Components/Modal.razor.scss",
+    "minify": {
+      "enabled": false
+    }
+  },
+  {
+    "outputFile": "Pages/Components/Toast/Toast.razor.css",
+    "inputFile": "Pages/Components/Toast/Toast.razor.scss",
+    "minify": {
+      "enabled": false
+    }
+  }
+]

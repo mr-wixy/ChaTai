@@ -1,0 +1,146 @@
+﻿@using Blazored.LocalStorage;
+@using ChaTai.Blazor.Data;
+@using ChaTai.Blazor.Pages.Components;
+@using System.Security.Claims;
+@using System.Diagnostics.CodeAnalysis;
+
+<div class="window-header">
+    <div class="window-header-title">
+        <div class="window-header-main-title">
+            设置
+        </div>
+        <div class="window-header-sub-title">
+            设置选项
+        </div>
+    </div>
+    <div class="window-actions">
+        <div class="window-action-button">
+            <IconBtn Bordered Title="Clear All Data" OnClick="ClearStorage">
+                <Icon IconFileName="clear" />
+            </IconBtn>
+        </div>
+        <div class="window-action-button">
+            <IconBtn Bordered Title="Reset Config">
+                <Icon IconFileName="reload" />
+            </IconBtn>
+        </div>
+        <div class="window-action-button">
+            <IconBtn Bordered Title="Close Setting" OnClick="CloseSetting">
+                <Icon IconFileName="close" />
+            </IconBtn>
+        </div>
+    </div>
+</div>
+<div class="settings">
+    <div class="list">
+        <div class="list-item">
+            <div class="settings-title">
+                <div>紧凑边框</div>
+            </div>
+            <input type="checkbox" checked="@AppConfig.TightBorder" @onchange="@OnChange" />
+        </div>
+        <div class="list-item">
+            <div class="settings-title">
+                主题
+            </div>
+            <select value="light" @onchange="@ChangeTheme">
+                <option value="dark" key="dark">
+                    dark
+                </option>
+                <option value="auto" key="auto">
+                    auto
+                </option>
+                <option value="light" key="light">
+                    light
+                </option>
+            </select>
+        </div>
+        <div class="list-item">
+            <div class="settings-title">
+                快捷键
+            </div>
+            <select value="@((int)AppConfig.ShortcutKey)" @onchange="@ChangeShortcutKey">
+                <option value="0" key="Enter">
+                    Enter
+                </option>
+                <option value="1" key="Ctrl">
+                    Ctrl+Enter
+                </option>
+                <option value="2" key="Shift">
+                    Shift+Enter
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="list">
+        <div class="list-item">
+            <div class="settings-title">
+                访问密码
+                <div class="settings-sub-title">设置正确的密码才能正常使用</div>
+            </div>
+            <div class="password-input-container">
+            <InputText type="password" class="password-input" @bind-Value="AppConfig.Secret" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public AppConfig AppConfig { get; set; }
+
+    [Parameter]
+    public EventCallback<AppConfig> AppConfigChanged { get; set; }
+
+    [Parameter]
+    public EventCallback CloseSetting{ get; set; }
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
+    [NotNull]
+    public ILocalStorageService? LocalStorage { get; set; }
+
+
+    public void Close()
+    {
+        if (CloseSetting.HasDelegate)
+            CloseSetting.InvokeAsync();
+    }
+
+    public async Task OnChange(ChangeEventArgs e)
+    {
+        AppConfig.TightBorder = (bool)e.Value;
+        if (AppConfigChanged.HasDelegate)
+            AppConfigChanged.InvokeAsync(AppConfig);
+
+        await SaveConfig();
+    }
+
+    public async Task ChangeTheme(ChangeEventArgs e)
+    {
+        await JSRuntime.InvokeVoidAsync("ChangeTheme", e.Value);
+    }
+
+    public async Task ChangeShortcutKey(ChangeEventArgs e)
+    {
+        AppConfig.ShortcutKey = (ShortcutKey)int.Parse(e.Value.ToString());
+        if (AppConfigChanged.HasDelegate)
+            await AppConfigChanged.InvokeAsync(AppConfig);
+        await SaveConfig();
+    }
+
+    public async Task ClearStorage()
+    {
+        if (CloseSetting.HasDelegate)
+            CloseSetting.InvokeAsync();
+        await LocalStorage.ClearAsync();
+    }
+
+    public async Task SaveConfig()
+    {
+        await LocalStorage.SetItemAsync<AppConfig>("config", AppConfig);
+    }
+}

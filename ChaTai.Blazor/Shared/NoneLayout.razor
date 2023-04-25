@@ -1,0 +1,9 @@
+﻿@using ChaTai.Blazor.Pages.Components
+@using ChaTai.Blazor.Pages.Components.Toast;
+@inherits LayoutComponentBase
+
+<PageTitle>ChaTai</PageTitle>
+
+@Body
+
+<BaseContainer Components="new List<Type>{ typeof(ToastContainer) }" />

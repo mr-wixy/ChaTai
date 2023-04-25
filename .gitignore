@@ -1,0 +1,5 @@
+﻿.vs
+bin
+obj
+Properties/PublishProfiles/linux_x64.pubxml.user
+ChaTai.App/ChaTai.App.csproj.user

@@ -1,0 +1,17 @@
+﻿@import 'globals.scss';
+@import 'markdown.scss';
+@import 'highlight.scss';
+@import 'prism.scss';
+
+.subscribe-content {
+    background-color: var(--gray);
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}

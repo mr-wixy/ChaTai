@@ -1,0 +1,52 @@
+﻿.modal-container {
+  box-shadow: var(--card-shadow);
+  background-color: var(--white);
+  border-radius: 12px;
+  width: 60vw;
+  animation: slide-in ease 0.3s;
+  --modal-padding: 20px;
+}
+.modal-container .modal-header {
+  padding: var(--modal-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: var(--border-in-light);
+}
+.modal-container .modal-header .modal-title {
+  font-weight: bolder;
+  font-size: 16px;
+}
+.modal-container .modal-header .modal-close-btn {
+  cursor: pointer;
+}
+.modal-container .modal-header .modal-close-btn:hover {
+  filter: brightness(1.2);
+}
+.modal-container .modal-content {
+  max-height: 60vh;
+  padding: var(--modal-padding);
+  overflow: auto;
+  border-radius: 12px;
+}
+.modal-container .modal-footer {
+  padding: var(--modal-padding);
+  display: flex;
+  justify-content: flex-end;
+}
+.modal-container .modal-footer .modal-actions {
+  display: flex;
+  align-items: center;
+}
+.modal-container .modal-footer .modal-actions .modal-action:not(:last-child) {
+  margin-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-container {
+    width: 90vw;
+  }
+  .modal-container .modal-content {
+    max-height: 50vh;
+  }
+}

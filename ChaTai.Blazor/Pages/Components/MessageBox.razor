@@ -1,0 +1,22 @@
+﻿@inherits InputBase<string>
+
+
+<textarea class="@Class" @bind="CurrentValue" @bind:event="oninput"
+          @attributes="AdditionalAttributes" />
+
+
+@code
+{
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
+
+    protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
+    {
+        result = value;
+        validationErrorMessage = null;
+        return true;
+    }
+}

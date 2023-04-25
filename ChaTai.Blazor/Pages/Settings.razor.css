@@ -1,0 +1,141 @@
+﻿.window-header {
+  padding: 14px 20px;
+  border-bottom: rgba(0, 0, 0, 0.1) 1px solid;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-header-title {
+  max-width: calc(100% - 100px);
+  overflow: hidden;
+}
+.window-header-title .window-header-main-title {
+  font-size: 20px;
+  font-weight: bolder;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  max-width: 50vw;
+}
+.window-header-title .window-header-sub-title {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.window-actions {
+  display: inline-flex;
+}
+
+.window-action-button {
+  margin-left: 10px;
+}
+
+.card {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  padding: 10px;
+}
+
+.popover {
+  position: relative;
+}
+
+.popover-content {
+  position: absolute;
+  animation: slide-in 0.3s ease;
+  right: 0;
+  top: calc(100% + 10px);
+}
+
+.popover-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px;
+  border-bottom: var(--border-in-light);
+  padding: 10px 20px;
+  animation: slide-in ease 0.6s;
+}
+
+.list {
+  border: var(--border-in-light);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 20px;
+  animation: slide-in ease 0.3s;
+}
+
+.list .list-item:last-child {
+  border: 0;
+}
+
+.show {
+  opacity: 1;
+  transition: all ease 0.3s;
+  transform: translateY(0);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  animation: slide-in ease 0.6s;
+  z-index: 99999;
+}
+
+.hide {
+  opacity: 0;
+  transition: all ease 0.3s;
+  transform: translateY(20px);
+}
+
+.settings {
+  padding: 20px;
+  overflow: auto;
+}
+
+.settings-title {
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.settings-sub-title {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.password-input-container {
+  max-width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+.password-input-container .password-eye {
+  margin-right: 4px;
+}
+.password-input-container .password-input {
+  min-width: 80%;
+}

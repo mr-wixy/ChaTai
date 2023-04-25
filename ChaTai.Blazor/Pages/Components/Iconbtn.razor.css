@@ -1,0 +1,55 @@
+﻿.icon-button {
+  background-color: var(--white);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  user-select: none;
+}
+
+.border {
+  border: var(--border-in-light);
+}
+
+.icon-button:hover {
+  filter: brightness(0.9);
+  border-color: var(--primary);
+}
+
+.icon-button-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .icon-button {
+    padding: 16px;
+  }
+}
+:global(.dark) div:not(:global(.no-dark)) > .icon-button-icon {
+  filter: invert(0.5);
+}
+:global(.dark) .icon-button:hover {
+  filter: brightness(1.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  div:not(:global(.no-dark)) > .icon-button-icon {
+    filter: invert(0.5);
+  }
+  .icon-button:hover {
+    filter: brightness(1.2);
+  }
+}
+.icon-button-text {
+  margin-left: 5px;
+  font-size: 12px;
+}

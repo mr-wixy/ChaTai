@@ -1,0 +1,61 @@
+﻿@using System.Reflection;
+@using ChaTai.Core;
+
+@if (GlobalVariable.Platform == PlatformType.Web)
+{
+    @if (string.IsNullOrEmpty(CssName))
+    {
+        @((MarkupString)iconText)
+    }
+    else
+    {
+        <div class="@CssName">
+            @((MarkupString)iconText)
+        </div>
+    }
+}
+else
+{
+    @if (string.IsNullOrEmpty(CssName))
+    {
+        IconFileName = IconFileName == "three-dots" ? "three-dots-home" : IconFileName;
+        <img src="@("icons/"+IconFileName+".svg")" />
+    }
+    else
+    {
+        IconFileName = IconFileName == "three-dots" ? "three-dots-home" : IconFileName;
+        <div class="@CssName">
+            <img src="@("icons/"+IconFileName+".svg")" />
+        </div>
+    }
+}
+
+
+
+@code {
+    [Parameter]
+    public string IconFileName { get; set; } = "add";
+
+    private string iconText = "";
+
+    [Parameter]
+    public string CssName { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (GlobalVariable.Platform == PlatformType.Web)
+        {
+            try
+            {
+                var appDir = AppContext.BaseDirectory;
+                var path = Path.Combine(appDir,$"wwwroot/icons/{IconFileName}.svg");
+                iconText = File.ReadAllText(path);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+            
+        return base.OnInitializedAsync();
+    }
+}

@@ -1,0 +1,82 @@
+﻿<PageTitle>@Title | @Description</PageTitle>
+<HeadContent>
+    <meta name="keywords" content="@Title,ChatGPT,ChatAI">
+    <meta name="description" content="@Description">
+</HeadContent>
+@if (!isInited)
+{
+    <div class="loading-content">
+        <Icon IconFileName="bot" />
+        <Icon IconFileName="three-dots" />
+    </div>
+}
+else
+{
+    <div class="@(AppConfig.TightBorder && !IsMobile?"tight-container":"container")">
+        <div class="sidebar @(showSideBar?"sidebar-show":"")">
+            <div class="sidebar-header">
+                <div class="sidebar-title">@Title</div>
+                <div class="sidebar-sub-title">
+                    @Description
+                </div>
+                <div class="sidebar-logo">
+                    <Icon IconFileName="chatgpt" />
+                </div>
+            </div>
+
+            <div class="sidebar-body" @onclick="()=>{ ChangeSidebarVisible(); openSettings = false;}">
+                <div class="chat-list">
+                    @foreach (var item in ChatList)
+                    {
+                        <div class="chat-item @(CurrentSession?.Id == item.Id? "chat-item-selected":"")" @onclick="async ()=> await SelectChat(item)">
+                            <div class="chat-item-title">@item.Title</div>
+                            <div class="chat-item-info">
+                                <div class="chat-item-count">
+                                    @item.Messages.Count 条对话记录
+                                </div>
+                                <div class="chat-item-date">@item.LastUpdateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                            </div>
+                            <div class="chat-item-delete" @onclick="()=>DeleteChat(item)">
+                                <Icon IconFileName="delete" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="sidebar-tail">
+                    <div class="sidebar-actions">
+                        <div class="sidebar-action">
+                            <IconBtn Bordered Title="设置" OnClick="()=>{openSettings = true; ChangeSidebarVisible();}">
+                            <Icon IconFileName="settings" />
+                            </IconBtn>
+                        </div>
+                        <div class="sidebar-action">
+                        <IconBtn Bordered Title="GitHub" OnClick="GoToGithub">
+                            <Icon IconFileName="github" />
+                            </IconBtn>
+                        </div>
+                    </div>
+                    <div class="sidebar-actions">
+                        <IconBtn Bordered Title="新增" Text="新的对话" OnClick="AddChat">
+                        <Icon IconFileName="add" />
+                        </IconBtn>
+                    </div>
+            </div>
+        </div>
+
+        <div class="window-content">
+            @if (openSettings)
+            {
+                <Settings CloseSetting="() => openSettings = false" @bind-AppConfig="AppConfig" />
+            }
+            else
+            {
+                <Chat @bind-AppConfig="AppConfig" 
+                    IsMobile="IsMobile" CurrentSession="CurrentSession" 
+                    SendMessage="SendMessage" ChangeSideVisiable="ChangeSidebarVisible"
+                    />
+            }
+        </div>
+    </div>
+}

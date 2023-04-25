@@ -1,0 +1,45 @@
+﻿<style>
+    .toast-container {
+        position: fixed;
+        top: 0;
+        bottom: unset;
+        left: 0;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        transition: opacity .3s linear, top .3s linear, bottom .3s linear;
+    }
+</style>
+
+<div class="toast-container">
+    @foreach (var item in Options)
+    {
+        <Toast Content="@item.Content" />
+    }
+</div>
+
+@code {
+    public static ToastContainer? Instance { get; private set; }
+
+    public ToastContainer()
+    {
+        Instance = this;
+    }
+
+    List<ToastOption> Options = new List<ToastOption>();
+
+    public void Add(ToastOption option)
+    {
+        Options.Add(option);
+        StateHasChanged();
+    }
+
+    public void Remove(ToastOption option)
+    {
+        Options.Remove(option);
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,38 @@
+﻿
+<div class="icon-button @(Bordered? "border":"") @CssClass" @onclick="OnBtnClick" title="@Title">
+    @if (ChildContent != null)
+    {
+        <div class="icon-button-icon">@ChildContent</div>
+    }
+    @if (!string.IsNullOrEmpty(Text))
+    {
+        <div class="icon-button-text">@Text</div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public bool Bordered { get; set; }
+
+    [Parameter]
+    public string CssClass { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+
+    public void OnBtnClick()
+    {
+        if (OnClick.HasDelegate)
+            OnClick.InvokeAsync();
+    }
+}
